@@ -3,107 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asociația Curcubeu Peste Hațeg</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,900&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>Hațeg Alternativ | Moștenirea de Aur</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
-        :root { --auriu: #c5a059; --alb: #ffffff; --negru: #0a0a0a; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--negru); color: #fff; line-height: 1.6; }
-
-        .site-header { 
-            position: fixed; top: 0; width: 100%; z-index: 1000; padding: 25px 50px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-            display: flex; justify-content: space-between; align-items: center;
+        :root { 
+            --auriu-gold: #ffd700; 
+            --negru-pur: #000000; 
+            --alb: #ffffff;
+            --overlay-card: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
         }
-        .brand { font-weight: 900; letter-spacing: 3px; text-transform: uppercase; font-size: 0.9rem; text-decoration: none; color: #fff; }
-        .main-nav a { text-decoration: none; color: #fff; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-left: 20px; }
 
-        .hero {
-            height: 100vh; background: url('images/hero-camp-munti.jpg') center/cover;
-            position: relative; display: flex; align-items: center; justify-content: center; text-align: center;
-        }
-        .hero::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2), var(--negru));
-        }
-        .hero-content { position: relative; z-index: 2; max-width: 900px; padding: 0 20px; }
-        .hero-content h1 { font-family: 'Playfair Display'; font-size: clamp(3rem, 10vw, 6rem); font-style: italic; font-weight: 900; line-height: 0.9; }
-        .hero-content span { font-size: 0.7rem; letter-spacing: 8px; color: var(--auriu); text-transform: uppercase; display: block; margin-bottom: 20px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        a, a:visited, a:hover, a:active { text-decoration: none !important; color: inherit !important; }
 
-        .section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; text-align: center; }
-        .gold-title { font-family: 'Playfair Display'; font-size: 2.5rem; font-style: italic; color: var(--auriu); margin-bottom: 30px; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .card { background: #111; border-bottom: 3px solid var(--auriu); overflow: hidden; transition: 0.4s; }
-        .card:hover { transform: translateY(-10px); }
-        .card-img { height: 250px; background-size: cover; background-position: center; }
-        .card-info { padding: 30px; }
+        body { background: var(--negru-pur); color: var(--alb); font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* HEADER */
+        .site-header { position: absolute; top: 0; width: 100%; z-index: 9999; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .brand svg { height: 90px; width: auto; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4)); }
+        .burger { cursor: pointer; z-index: 10000; padding: 10px; }
+        .burger div { width: 30px; height: 2px; background: var(--auriu-gold); margin: 6px; transition: 0.3s; }
+
+        .main-nav { position: fixed; top: 0; right: -100%; height: 100vh; width: 100%; background: rgba(0,0,0,0.98); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.5s ease; z-index: 9500; }
+        .main-nav.active { right: 0; }
+        .main-nav a { font-size: 1.8rem; font-family: 'Cinzel'; margin: 15px 0; letter-spacing: 3px; color: var(--alb) !important; text-transform: uppercase; }
+
+        /* HERO */
+        .hermes-viewport { position: relative; width: 100%; height: 85vh; overflow: hidden; }
+        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; visibility: hidden; transition: opacity 2s ease; }
+        .slide.active { opacity: 1; visibility: visible; }
+        .slide-bg { position: absolute; width: 100%; height: 100%; background-size: cover; background-position: center !important; transform: scale(1); transition: transform 10s linear; }
+        .slide.active .slide-bg { transform: scale(1.1); }
+        .slide-overlay { position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 2; }
+        .hero-text-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; text-align: center; width: 90%; }
+        .slide-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 5rem); font-style: italic; color: var(--auriu-gold); text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+
+        /* INTRO */
+        .intro-text { padding: 80px 20px; text-align: center; max-width: 800px; margin: 0 auto; }
+        .intro-text h2 { font-family: 'Cinzel'; color: var(--auriu-gold); margin-bottom: 20px; letter-spacing: 3px; font-size: 1.2rem; }
+        .intro-text p { font-size: 1.1rem; color: #ccc; line-height: 1.8; font-weight: 300; font-style: italic; }
+
+        /* GRID CARDURI */
+        .grid-lux { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 40px 20px; max-width: 1600px; margin: 0 auto; }
+        .card-lux { 
+            height: 480px; display: flex; flex-direction: column; justify-content: flex-end; 
+            padding: 30px; border: 1px solid #1a1a1a; position: relative; overflow: hidden; 
+            background-size: cover !important; background-position: center !important; 
+            transition: 0.4s;
+        }
+        .card-lux::before { content: ""; position: absolute; inset:0; background: var(--overlay-card); z-index: 1; }
+        .card-content { position: relative; z-index: 5; }
+        .card-lux h3 { font-family: 'Playfair Display'; font-size: 2rem; color: var(--auriu-gold); margin-bottom: 10px; font-style: italic; }
+        .card-lux p { font-size: 0.85rem; margin-bottom: 15px; opacity: 0.8; letter-spacing: 1px; }
+        .btn-gold { display: inline-block; padding: 10px 20px; border: 1px solid var(--auriu-gold); color: var(--auriu-gold); font-family: 'Cinzel'; font-size: 0.7rem; letter-spacing: 2px; }
+
+        footer { padding: 80px; text-align: center; opacity: 0.4; font-family: 'Cinzel'; font-size: 0.7rem; letter-spacing: 5px; color: var(--auriu-gold); border-top: 1px solid #111; }
     </style>
 </head>
 <body>
 
     <header class="site-header">
-        <a href="index.html" class="brand">Curcubeu Peste Hațeg</a>
-        <nav class="main-nav">
-            <a href="#activitati">Activități</a>
-            <a href="#excursii">Excursii</a>
-            <a href="#asociatie">Despre Noi</a>
-            <a href="contact.html" style="border: 1px solid var(--auriu); padding: 8px 15px;">Implică-te</a>
+        <div class="brand">
+            <svg viewBox="0 0 800 800">
+                <defs><linearGradient id="mtnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#ffd700;stop-opacity:1"/><stop offset="100%" style="stop-color:#b8860b;stop-opacity:1"/></linearGradient></defs>
+                <circle cx="400" cy="280" r="105" fill="none" stroke="#ffd700" stroke-width="2" opacity="0.4"/>
+                <path d="M300 450 L400 250 L500 450 Z" fill="url(#mtnGrad)"/>
+                <text x="400" y="765" font-family="'Cinzel', serif" text-anchor="middle" font-size="45" font-weight="900" letter-spacing="2" fill="#ffd700">HAȚEG ALTERNATIV</text>
+            </svg>
+        </div>
+        <div class="burger" id="burger"><div></div><div></div><div></div></div>
+        <nav class="main-nav" id="nav-links">
+            <a href="index.html">ACASĂ</a>
+            <a href="pensiune.html">PENSIUNEA</a>
+            <a href="retreat.html">METANOIA</a>
+            <a href="gastronomie.html">GASTRONOMIE</a>
+            <a href="forum.html">JURNAL</a>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <span>ASOCIAȚIA</span>
-            <h1>Construim aripi<br>prin credință.</h1>
-        </div>
-    </section>
-
-    <section id="activitati" class="section">
-        <h2 class="gold-title">Rânduiala pentru Copii</h2>
-        <p style="font-weight: 300; opacity: 0.8;">Activități educative și spirituale realizate în parteneriat cu Biserica, pentru a păstra tradiția și valorile locului.</p>
-        
-        <div class="grid">
-            <div class="card">
-                <div class="card-img" style="background-image: url('images/atelier-copii.jpg');"></div>
-                <div class="card-info">
-                    <h3>Ateliere de Creație</h3>
-                    <p>Pictură, modelaj și ore de poveste în pridvorul bisericii.</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-img" style="background-image: url('images/scoala-duminica.jpg');"></div>
-                <div class="card-info">
-                    <h3>Educație Spirituală</h3>
-                    <p>Descoperim valorile creștine prin joc și comuniune.</p>
-                </div>
+    <section class="hermes-viewport">
+        <div class="slide active"><div class="slide-bg" style="background-image: url('images/hero-premium.jpg');"></div><div class="slide-overlay"></div></div>
+        <div class="slide"><div class="slide-bg" style="background-image: url('images/hero-camp-munti.jpg');"></div><div class="slide-overlay"></div></div>
+        <div class="slide"><div class="slide-bg" style="background-image: url('images/rasarit.jpg');"></div><div class="slide-overlay"></div></div>
+        <div class="hero-text-container">
+            <div class="slide-content">
+                <h1>Simte. Explorează.</h1>
+                <p style="font-family:'Cinzel'; color:white; letter-spacing:4px; font-size:0.8rem; margin-top:10px;">RÂNDUIALA TIHNEI</p>
             </div>
         </div>
     </section>
 
-    <section id="excursii" class="section" style="background: #050505;">
-        <h2 class="gold-title">Explorăm Țara Hațegului</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="card-img" style="background-image: url('images/munti.jpg');"></div>
-                <div class="card-info">
-                    <h3>Pelerinaje & Trasee</h3>
-                    <p>Excursii la mănăstiri, cetăți și în inima Geoparcului Dinozaurilor.</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-img" style="background-image: url('images/tabara-vara.jpg');"></div>
-                <div class="card-info">
-                    <h3>Tabere de Vară</h3>
-                    <p>Zile pline de soare, explorare și prietenii noi în Retezat.</p>
-                </div>
-            </div>
-        </div>
+    <section class="intro-text">
+        <h2>MOȘTENIREA ȘI SPIRITUL</h2>
+        <p>"Aici, timpul nu se măsoară în ore, ci în rânduiala pământului. Hațeg Alternativ este despre regăsirea liniștii prin gesturi simple și autentice."</p>
     </section>
 
-    <footer style="padding: 50px; text-align: center; opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px;">
-        ASOCIAȚIA CURCUBEU PESTE HAȚEG | CIF 36345078 | TOTEȘTI, HUNEDOARA
-    </footer>
+    <div class="grid-lux">
+        <a href="pensiune.html" class="card-lux" style="background-image: url('images/la-buliga-pensiune.jpg');">
+            <div class="card-content"><h3>Izolare la Buligă</h3><p>Tihnă deplină în matca tradiției.</p><span class="btn-gold">DETALII</span></div>
+        </a>
 
+        <a href="retreat.html" class="card-lux" style="background-image: url('images/hero-camp-munti.jpg');">
+            <div class="card-content"><h3>Metanoia</h3><p>Retreat spiritual în inima munților.</p><span class="btn-gold">DESCOPERĂ</span></div>
+        </a>
+
+        <a href="experiente.html" class="card-lux" style="background-image: url('images/jeep.jpg');">
+            <div class="card-content"><h3>Hațeg pe Roți</h3><p>Aventură off-road pe culmi.</p><span class="btn-gold">EXPLOREAZĂ</span></div>
+        </a>
+
+        <a href="gastronomie.html" class="card-lux" style="background-image: url('images/index-mancare.jpg');">
+            <div class="card-content"><h3>Gastronomie</h3><p>Rețete vechi gătit la foc mic.</p><span class="btn-gold">GUSTĂ</span></div>
+        </a>
+
+        <a href="experiente.html" class="card-lux" style="background-image: url('images/floripepanza.JPG');">
+            <div class="card-content"><h3>Atelier Creație</h3><p>Măiestria mâinilor tradiționale.</p><span class="btn-gold">CREEAZĂ</span></div>
+        </a>
+    </div>
+
+    <footer>HAȚEG ALTERNATIV &copy; 2026</footer>
+
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true; s1.src='https://embed.tawk.to/642944b54247f20fefea97df/1gsvek60a';
+            s1.charset='UTF-8'; s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+
+    <script>
+        const burger = document.getElementById('burger');
+        const nav = document.getElementById('nav-links');
+        burger.addEventListener('click', () => { nav.classList.toggle('active'); });
+
+        let slides = document.querySelectorAll('.slide');
+        let current = 0;
+        setInterval(() => {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, 5000);
+    </script>
 </body>
 </html>
