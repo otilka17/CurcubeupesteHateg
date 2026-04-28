@@ -1,43 +1,67 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18106516696"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18106516696');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Asociația Suflet Hunedoarean | Curcubeu peste Hațeg</title>
+    <title>Asociația Curcubeu peste Hațeg | Moștenirea de Aur</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Cinzel:wght@400;700;900&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        :root { --auriu: #c5a059; --negru: #050505; --alb: #ffffff; }
+        :root { 
+            --auriu-gold: #ffd700; 
+            --negru-pur: #000000; 
+            --alb: #ffffff;
+            --overlay-card: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        body { background: var(--negru); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        a { text-decoration: none !important; color: inherit !important; }
+        a, a:visited, a:hover, a:active { text-decoration: none !important; color: inherit !important; }
 
-        .site-header { position: absolute; top: 0; width: 100%; z-index: 9999; padding: 30px 5%; display: flex; justify-content: space-between; align-items: center; }
-        .brand-logo img { height: 80px; filter: drop-shadow(0 0 15px #000); }
+        body { background: var(--negru-pur); color: var(--alb); font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
 
-        .hero-asociatie { 
-            height: 80vh; background: linear-gradient(rgba(0,0,0,0.5), var(--negru)), url('images/narcise.jpg') center/cover; 
-            display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 20px;
-        }
-        .hero-asociatie h1 { font-family: 'Playfair Display'; font-style: italic; font-size: clamp(2.5rem, 8vw, 5.5rem); color: var(--auriu); text-shadow: 2px 2px 20px #000; }
-
-        .content-section { max-width: 900px; margin: 0 auto; padding: 100px 20px; text-align: center; }
-        .label-gold { font-family: 'Cinzel'; color: var(--auriu); letter-spacing: 8px; font-size: 0.8rem; display: block; margin-bottom: 20px; }
-        .quote-box { font-family: 'Playfair Display'; font-style: italic; font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.5; color: #ccc; margin-bottom: 50px; }
+        /* HEADER */
+        .site-header { position: absolute; top: 0; width: 100%; z-index: 9999; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; }
+        .brand svg { height: 90px; width: auto; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4)); }
         
-        .mission-text { color: #888; line-height: 1.8; font-size: 1.1rem; margin-bottom: 60px; font-weight: 200; }
+        .burger { cursor: pointer; z-index: 10001; background: rgba(0,0,0,0.6); padding: 12px; border-radius: 8px; border: 1px solid var(--auriu-gold); }
+        .burger div { width: 28px; height: 2px; background: var(--auriu-gold); margin: 6px; }
 
-        .btn-info { 
-            display: inline-block; padding: 20px 50px; border: 1px solid var(--auriu); 
-            color: var(--auriu) !important; font-family: 'Cinzel'; letter-spacing: 4px; 
-            font-weight: 700; transition: 0.4s; background: transparent;
-        }
-        .btn-info:hover { background: var(--auriu); color: #000 !important; }
+        /* HERO SLIDER */
+        .hermes-viewport { position: relative; width: 100%; height: 85vh; overflow: hidden; }
+        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; visibility: hidden; transition: opacity 2s ease; }
+        .slide.active { opacity: 1; visibility: visible; }
+        .slide-bg { position: absolute; width: 100%; height: 100%; background-size: cover; background-position: center !important; transition: transform 10s linear; }
+        .slide.active .slide-bg { transform: scale(1.1); }
+        .hero-text-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; text-align: center; width: 90%; }
+        .slide-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 8vw, 5rem); font-style: italic; color: var(--auriu-gold); text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
 
-        footer { padding: 60px 20px; text-align: center; opacity: 0.4; font-family: 'Cinzel'; font-size: 0.7rem; letter-spacing: 3px; }
-        .whatsapp-float { position: fixed; bottom: 30px; left: 30px; background: #25d366; border-radius: 50%; width: 65px; height: 65px; display: flex; align-items: center; justify-content: center; font-size: 35px; z-index: 1001; color: #fff; }
+        /* INTRO */
+        .intro-text { padding: 80px 20px; text-align: center; max-width: 900px; margin: 0 auto; }
+        .intro-text h2 { font-family: 'Cinzel'; color: var(--auriu-gold); margin-bottom: 20px; letter-spacing: 5px; font-size: 1.2rem; }
+        .intro-text p { font-size: 1.2rem; color: #ccc; line-height: 1.8; font-style: italic; font-weight: 300; }
+
+        /* GRID */
+        .grid-lux { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; padding: 40px 5%; max-width: 1600px; margin: 0 auto; }
+        .card-lux { height: 500px; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; border: 1px solid #1a1a1a; position: relative; overflow: hidden; background-size: cover !important; transition: 0.6s; }
+        .card-lux::before { content: ""; position: absolute; inset:0; background: var(--overlay-card); z-index: 1; }
+        .card-content { position: relative; z-index: 5; }
+        .card-lux h3 { font-family: 'Playfair Display'; font-size: 2.2rem; color: var(--auriu-gold); margin-bottom: 10px; font-style: italic; }
+        
+        .btn-gold { display: inline-block; padding: 12px 25px; border: 1px solid var(--auriu-gold); color: var(--auriu-gold); font-family: 'Cinzel'; font-size: 0.75rem; letter-spacing: 3px; transition: 0.3s; margin-top: 20px; }
+        .btn-gold:hover { background: var(--auriu-gold); color: #000; }
+
+        footer { padding: 80px 20px; text-align: center; opacity: 0.5; font-family: 'Cinzel'; font-size: 0.7rem; letter-spacing: 5px; color: var(--auriu-gold); border-top: 1px solid #111; }
+        .whatsapp-float { position: fixed; bottom: 30px; left: 30px; background: #25d366; border-radius: 50%; width: 65px; height: 65px; display: flex; align-items: center; justify-content: center; font-size: 35px; z-index: 1001; color: #fff !important; }
     </style>
 </head>
 <body>
@@ -45,26 +69,71 @@
     <a href="https://wa.me/40749229686" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
     <header class="site-header">
-        <a href="index.html" class="brand-logo"><img src="images/logo1.svg" alt="Metanoia Logo"></a>
-        <a href="../index.html" style="font-family:'Cinzel'; color:var(--auriu); font-size:0.7rem; letter-spacing:2px;">← ÎNAPOI ÎN HUB</a>
+        <div class="brand">
+            <svg viewBox="0 0 800 800">
+                <defs><linearGradient id="mtnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#ffd700;stop-opacity:1"/><stop offset="100%" style="stop-color:#b8860b;stop-opacity:1"/></linearGradient></defs>
+                <circle cx="400" cy="280" r="105" fill="none" stroke="#ffd700" stroke-width="2" opacity="0.4"/>
+                <path d="M300 450 L400 250 L500 450 Z" fill="url(#mtnGrad)"/>
+                <text x="400" y="765" font-family="'Cinzel', serif" text-anchor="middle" font-size="40" font-weight="900" letter-spacing="4" fill="#ffd700">CURCUBEU PESTE HAȚEG</text>
+            </svg>
+        </div>
+        <div class="burger" id="burger"><div></div><div></div><div></div></div>
     </header>
 
-    <section class="hero-asociatie">
-        <h1>Lumină și Rânduială.</h1>
+    <section class="hermes-viewport">
+        <div class="slide active"><div class="slide-bg" style="background-image: url('images/rasarit.jpg');"></div></div>
+        <div class="slide"><div class="slide-bg" style="background-image: url('images/narcise.jpg');"></div></div>
+        <div class="slide"><div class="slide-bg" style="background-image: url('images/Sarmizegetusa.jpg');"></div></div>
+        <div class="hero-text-container">
+            <div class="slide-content">
+                <h1>Moștenire și Spirit.</h1>
+                <p style="font-family:'Cinzel'; color:white; letter-spacing:6px; font-size:0.9rem; margin-top:15px;">ASOCIAȚIA CURCUBEU PESTE HAȚEG</p>
+                <a href="info.html" class="btn-gold">IDENTITATE OFICIALĂ</a>
+            </div>
+        </div>
     </section>
 
-    <main class="content-section">
-        <span class="label-gold">MISIUNEA NOASTRĂ</span>
-        <div class="quote-box">„Curcubeu peste Hațeg nu este doar o cifră într-un registru, ci un legământ făcut cu viitorul comunității noastre.”</div>
-        
-        <p class="mission-text">
-            Din 2016, am înțeles că datoria asociației noastre, sub îndrumarea parohiei, este să scoatem copiii la lumină. Într-o lume a ecranelor, noi alegem potecile muntoase, tăcerea bisericilor de lemn și aerul tare al Ținutului Pădurenilor.
-        </p>
+    <section class="intro-text">
+        <h2>RÂNDUIALA TIHNEI</h2>
+        <p>"Aici, timpul nu se măsoară în ore, ci în rânduiala pământului. Curcubeu peste Hațeg este despre regăsirea rădăcinilor prin gesturi simple și autentice."</p>
+    </section>
 
-        <a href="info.html" class="btn-info">INFO OFICIALE ASOCIAȚIE</a>
-    </main>
+    <div class="grid-lux">
+        <a href="evenimente.html" class="card-lux" style="background-image: url('images/nori.jph.jpg');">
+            <div class="card-content"><h3>Expediție Maramureș</h3><span class="btn-gold">DETALII</span></div>
+        </a>
+        <a href="pensiune.html" class="card-lux" style="background-image: url('images/IMG_20260330_160353.webp');">
+            <div class="card-content"><h3>Domeniile La Buligă</h3><span class="btn-gold">VIZITEAZĂ</span></div>
+        </a>
+        <a href="metanoia.html" class="card-lux" style="background-image: url('images/rasarit.jpg');">
+            <div class="card-content"><h3>Metanoia</h3><span class="btn-gold">DESCOPERĂ</span></div>
+        </a>
+    </div>
 
-    <footer>HAȚEG ALTERNATIV &copy; 2026</footer>
+    <footer>ASOCIAȚIA CURCUBEU PESTE HAȚEG &copy; 2026</footer>
 
+    <script>
+        const burger = document.getElementById('burger');
+        const nav = document.getElementById('nav-links');
+        burger.onclick = () => { document.querySelector('.main-nav').classList.toggle('active'); };
+
+        let slides = document.querySelectorAll('.slide');
+        let current = 0;
+        setInterval(() => {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, 5000);
+    </script>
+
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true; s1.src='https://embed.tawk.to/65f013449131ed19d97a0664/1hnowvsq3';
+            s1.charset='UTF-8'; s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
 </body>
 </html>
